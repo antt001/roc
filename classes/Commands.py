@@ -1,10 +1,10 @@
 from classes import AbstractMethods
 from classes.ImageCoordinate import ImageCoordinate
 from classes.Clicker import Clicker as clicker
-from classes.Speak import Speak
+# from classes.Speak import Speak
 import pyautogui
 import sys
-import winsound
+# import winsound
 from time import sleep
 import datetime
 import time
@@ -274,7 +274,7 @@ class ClickInvestigation(AbstractMethods.ProcessHandler):
 class MoveToScoutCampAndClick(AbstractMethods.ProcessHandler):
     def do_work(self):
         print('Moving over scout camp and clicking on it to open scout menu')
-        clicker.move(368*2-140, -127*2-140)
+        clicker.move(500*2-140, -90*2-140)
         clicker.click(clicker.mouse_pos())
         self.next()
 
@@ -347,9 +347,11 @@ class GoHome(AbstractMethods.ProcessHandler):
         if ImageCoordinate.is_on_screen('images/isHome'):
             print('You are at home')
             coord = ImageCoordinate.coords('images/isHome', shot=False)
+            # print(coord)
             clicker.move_to(coord)
         else:
             coord = ImageCoordinate.coords('images/isOutside')
+            # print('isOutside', coord)
             clicker.move_click(coord)
             print('Going to home. Now, you are at home.')
         self.next()
@@ -542,12 +544,15 @@ class CheckActionPoint(AbstractMethods.ProcessHandler):
 class CheckAntibot(AbstractMethods.ProcessHandler):
     def do_work(self):
         if ImageCoordinate.is_on_screen('images/is_antibot_active'):
-            winsound.Beep(2500, 1500)
+            # winsound.Beep(2500, 1500)
+            print ('\a')
             print('Antibot! Antibot! Antibot!')
+            quit()
         else:
             print('Bot test is not active, continue playing game.')
         if ImageCoordinate.is_on_screen('images/verify_button'):
-            winsound.Beep(2500, 1500)
+            # winsound.Beep(2500, 1500)
+            print ('\a')
             print('Verify the bot test please')
         else:
             print('Verification is not required. Continue...')
